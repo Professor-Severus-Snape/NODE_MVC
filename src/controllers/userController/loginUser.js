@@ -1,8 +1,8 @@
-import { sendSuccess } from '../utils/response.js';
-import users from '../data/users.js';
+import { sendSuccess } from '../../utils/response.js';
+import User from '../../models/User.js';
 
 // бизнес-логика - авторизация пользователя:
-const loginUser = (req, res, next) => {
+export const loginUser = (req, res, next) => {
   const { mail } = req.body;
 
   if (!mail) {
@@ -12,7 +12,7 @@ const loginUser = (req, res, next) => {
     return;
   }
 
-  const user = users.find((user) => user.mail === mail);
+  const user = User.getUserByEmail(mail);
 
   if (!user) {
     const error = new Error('Code: 404. Пользователь с таким email не найден');
@@ -21,7 +21,5 @@ const loginUser = (req, res, next) => {
     return;
   }
 
-  sendSuccess(res, 201, user); // 201 - Created - { success: true, data: { id: 1, mail: '...' } }
+  sendSuccess(res, 201, user); // 201 - Created - { success: true, data: { id: '1', mail: '...' } }
 };
-
-export default loginUser;
