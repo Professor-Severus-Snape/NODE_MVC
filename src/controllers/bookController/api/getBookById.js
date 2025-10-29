@@ -1,5 +1,5 @@
-import { sendSuccess } from '../../utils/response.js';
-import Book from '../../models/Book.js';
+import { sendSuccess } from '../../../utils/response.js';
+import Book from '../../../models/Book.js';
 
 // бизнес-логика - получение книги по её id:
 export const getBookById = (req, res, next) => {

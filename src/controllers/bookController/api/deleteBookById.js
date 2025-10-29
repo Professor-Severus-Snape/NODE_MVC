@@ -1,5 +1,5 @@
-import { sendSuccess } from '../../utils/response.js';
-import Book from '../../models/Book.js';
+import { sendSuccess } from '../../../utils/response.js';
+import Book from '../../../models/Book.js';
 
 // бизнес-логика - удаление книги по её id:
 export const deleteBookById = (req, res, next) => {

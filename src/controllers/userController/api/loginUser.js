@@ -1,5 +1,5 @@
-import { sendSuccess } from '../../utils/response.js';
-import User from '../../models/User.js';
+import { sendSuccess } from '../../../utils/response.js';
+import User from '../../../models/User.js';
 
 // бизнес-логика - авторизация пользователя:
 export const loginUser = (req, res, next) => {

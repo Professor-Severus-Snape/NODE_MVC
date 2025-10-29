@@ -1,5 +1,5 @@
-import { sendSuccess } from '../../utils/response.js';
-import Book from '../../models/Book.js';
+import { sendSuccess } from '../../../utils/response.js';
+import Book from '../../../models/Book.js';
 
 // бизнес-логика - получение всего списка книг:
 export const getAllBooks = (_req, res) => {

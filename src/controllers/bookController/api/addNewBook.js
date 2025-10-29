@@ -1,5 +1,5 @@
-import { sendSuccess } from '../../utils/response.js';
-import Book from '../../models/Book.js';
+import { sendSuccess } from '../../../utils/response.js';
+import Book from '../../../models/Book.js';
 
 // бизнес-логика - добавление новой книги в массив:
 export const addNewBook = (req, res, next) => {

@@ -1,5 +1,5 @@
 import express from 'express'; // подключение Express
-import apiRoutes from './routes/index.js'; // подключение роутов
+import routes from './routes/index.js'; // подключение роутов
 import errorUpload from './middleware/errorUpload.js'; // ошибка загрузки файла
 import error404 from './middleware/error404.js'; // маршрут не найден
 import errorHandler from './middleware/errorHandler.js'; // ошибка сервера
@@ -16,12 +16,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // 3. Middleware - основные маршруты:
-app.use('/api', apiRoutes); // http://localhost:${PORT}/api
+app.use('/', routes); // корневой роут -> http://localhost:{PORT}
 
 // 4. Middleware - обработка ошибок Multer (загрузка не pdf-файла):
 app.use(errorUpload);
 
-// 5. Middleware - обработка 404 (не сработал ни один маршрут -> http://localhost:3000/api/unknown):
+// 5. Middleware - обработка 404 (не сработал ни один маршрут -> http://localhost:{PORT}/unknown):
 app.use(error404);
 
 // 6. Middleware - централизованная обработка ошибок - throw new Error('Oops...') или next(err)):
