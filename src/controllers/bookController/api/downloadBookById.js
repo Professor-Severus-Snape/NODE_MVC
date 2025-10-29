@@ -2,7 +2,7 @@ import path from 'node:path';
 import fsPromises from 'node:fs/promises';
 import Book from '../../../models/Book.js';
 
-export const downloadBookById = async (req, res, next) => {
+export const downloadBookById = async(req, res, next) => {
   const { id } = req.params;
   const book = Book.getBookById(id);
 

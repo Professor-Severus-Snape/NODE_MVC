@@ -1,5 +1,5 @@
 import express from 'express';
-import multerUploadBook from '../../middleware/multerUploadBook.js'; // middleware (multer - загрузка)
+import multerUploadBook from '../../middleware/multerUploadBook.js'; // middleware (multer)
 import * as bookController from '../../controllers/bookController/index.js'; // конечные обработчики
 
 const router = express.Router();
