@@ -1,10 +1,10 @@
-import { sendSuccess } from '../utils/response.js';
-import books from '../data/books.js';
+import { sendSuccess } from '../../utils/response.js';
+import Book from '../../models/Book.js';
 
 // бизнес-логика - получение книги по её id:
-const getBookById = (req, res, next) => {
+export const getBookById = (req, res, next) => {
   const { id } = req.params;
-  const book = books.find((book) => book.id === id);
+  const book = Book.getBookById(id);
 
   if (!book) {
     const error = new Error('Code: 404. Книга не найдена.');
@@ -15,5 +15,3 @@ const getBookById = (req, res, next) => {
 
   sendSuccess(res, 200, book); // 200 - Ok
 };
-
-export default getBookById;

@@ -1,16 +1,16 @@
 import path from 'node:path';
 import fsPromises from 'node:fs/promises';
-import books from '../data/books.js';
+import Book from '../../models/Book.js';
 
-const downloadBookById = async(req, res, next) => {
+export const downloadBookById = async(req, res, next) => {
   const { id } = req.params;
-
-  const book = books.find((book) => book.id === id);
+  const book = Book.getBookById(id);
 
   if (!book) {
     const error = new Error('Code: 404. Книга для скачивания не найдена');
     error.status = 404;
-    return next(error);
+    next(error);
+    return;
   }
 
   const { fileBook } = book;
@@ -37,5 +37,3 @@ const downloadBookById = async(req, res, next) => {
 
   // NB! вызов res.json() после скачивания вызовет "Error: Can't set headers after they are sent."
 };
-
-export default downloadBookById;

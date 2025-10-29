@@ -1,9 +1,8 @@
-import { sendSuccess } from '../utils/response.js';
-import Book from '../classes/Book.js';
-import books from '../data/books.js';
+import { sendSuccess } from '../../utils/response.js';
+import Book from '../../models/Book.js';
 
 // бизнес-логика - добавление новой книги в массив:
-const addNewBook = (req, res, next) => {
+export const addNewBook = (req, res, next) => {
   const { title, description, authors, favorite, fileCover, fileName } =
     req.body;
 
@@ -25,8 +24,6 @@ const addNewBook = (req, res, next) => {
     fileBook: req.file.filename, // имя загруженного файла
   });
 
-  books.push(newBook);
+  Book.addBook(newBook);
   sendSuccess(res, 201, newBook); // 201 - Created
 };
-
-export default addNewBook;

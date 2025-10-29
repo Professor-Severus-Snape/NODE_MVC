@@ -1,20 +1,25 @@
 import express from 'express';
-import addNewBook from '../controllers/addNewBook.js'; // конечный обработчик
-import deleteBookById from '../controllers/deleteBookById.js'; // конечный обработчик
-import getAllBooks from '../controllers/getAllBooks.js'; // конечный обработчик
-import getBookById from '../controllers/getBookById.js'; // конечный обработчик
-import updateBookById from '../controllers/updateBookById.js'; // конечный обработчик
 import multerUploadBook from '../middleware/multerUploadBook.js'; // middleware (multer - загрузка)
-import downloadBookById from '../controllers/downloadBookById.js'; // конечный обработчик (скачать)
+import * as bookController from '../controllers/bookController/index.js'; // конечные обработчики
 
 const router = express.Router();
 
 // Middlewares уровня маршрутизации:
-router.get('/', getAllBooks); // получение всего списка книг
-router.get('/:id/download', downloadBookById); // скачивание книги (размещаем роут ПЕРЕД `/:id`)
-router.get('/:id', getBookById); // получение книги по её id
-router.post('/', multerUploadBook.single('fileBook'), addNewBook); // создание новой книги
-router.put('/:id', multerUploadBook.single('fileBook'), updateBookById); // изменение данных книги
-router.delete('/:id', deleteBookById); // удаление книги по её id
+
+// самый специфичный путь — должен стоять первым, чтобы '/:id' его не перекрыл:
+router.get('/:id/download', bookController.downloadBookById); // скачивание книги
+
+// путь ко всей коллекции — не конфликтует с другими - может стоять где угодно:
+router
+  .route('/')
+  .get(bookController.getAllBooks) // получение всего списка книг
+  .post(multerUploadBook.single('fileBook'), bookController.addNewBook); // создание новой книги
+
+// общий путь к одному элементу — идёт последним:
+router
+  .route('/:id')
+  .get(bookController.getBookById) // получение книги по её id
+  .put(multerUploadBook.single('fileBook'), bookController.updateBookById) // изменение данных книги
+  .delete(bookController.deleteBookById); // удаление книги по её id
 
 export default router;

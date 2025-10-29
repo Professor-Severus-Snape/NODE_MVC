@@ -6,7 +6,8 @@ export default class User {
     this.mail = mail;
   }
 
-  static users = [
+  // приватное хранилище пользователей - сразу добавляем mock-данные:
+  static #users = [
     { id: '1', mail: 'test@mail.ru' },
     new User('demo@gmail.com'),
     new User('alex@gmail.com'),
@@ -15,6 +16,6 @@ export default class User {
   ];
 
   static getUserByEmail(mail) {
-    return this.users.find((user) => user.mail === mail);
+    return this.#users.find((user) => user.mail === mail);
   }
 }

@@ -1,20 +1,17 @@
-import { sendSuccess } from '../utils/response.js';
-import books from '../data/books.js';
+import { sendSuccess } from '../../utils/response.js';
+import Book from '../../models/Book.js';
 
 // бизнес-логика - удаление книги по её id:
-const deleteBookById = (req, res, next) => {
+export const deleteBookById = (req, res, next) => {
   const { id } = req.params;
-  const idx = books.findIndex((book) => book.id === id);
+  const isRemoved = Book.removeBookById(id);
 
-  if (idx === -1) {
+  if (!isRemoved) {
     const error = new Error('Code: 404. Книга не найдена.');
     error.status = 404; // 404 - Not Found
     next(error); // передаём ошибку в errorHandler
     return;
   }
 
-  books.splice(idx, 1);
   sendSuccess(res, 200, 'Книга удалена'); // 200 - Ok
 };
-
-export default deleteBookById;
