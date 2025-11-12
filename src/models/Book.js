@@ -25,13 +25,16 @@ export default class Book {
     { length: 5 },
     (_, i) =>
       new Book({
-        title: `title-${i + 1}`,
-        description: `description-${i + 1}`,
-        authors: `authors-${i + 1}`,
-        favorite: `favorite-${i + 1}`,
-        fileCover: `fileCover-${i + 1}`,
-        fileName: `fileName-${i + 1}`,
-        fileBook: `fileBook-${i + 1}.pdf`,
+        title: `Книга #${i + 1}`,
+        description:
+          'Lorem ipsum dolor sit amet consectetur adipisicing elit. ' +
+          'Delectus modi similique eum reiciendis eaque! Aut, debitis? ' +
+          'Vel vero fugit impedit nobis incidunt, facilis minus, voluptas ullam illo quod totam.',
+        authors: `автор #${i + 1}`,
+        favorite: `закладка #${i + 1}`,
+        fileCover: `обложка #${i + 1}`,
+        fileName: `имя файла #${i + 1}`,
+        fileBook: 'test.pdf',
       }),
   );
 

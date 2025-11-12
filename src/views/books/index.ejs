@@ -1,0 +1,24 @@
+<section class="books">
+  <h2 class="books__title"><%= title %></h2>
+
+  <ul class="books__list">
+    <% books.forEach(book => { %>
+      <li class="book-card">
+        <div class="book-card__content">
+          <h3 class="book-card__title"><%= book.title %></h3>
+          <p class="book-card__text"><span>Авторы: </span><%= book.authors %></p>
+          <p class="book-card__text">
+            <span>Описание: </span><%= book.description %>
+          </p>
+        </div>
+        <div class="book-card__actions">
+          <a href="/books/<%= book.id %>" class="book-card__link">Просмотр</a>
+          <a href="/books/update/<%= book.id %>" class="book-card__link book-card__link_update">
+            ✎
+          </a>
+          <button class="book-card__btn book-card__btn_delete">✘</button>
+        </div>
+      </li>
+    <% }) %>
+  </ul>
+</section>
