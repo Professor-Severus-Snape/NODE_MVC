@@ -1,5 +1,6 @@
 import express from 'express';
 import error404 from '../../middleware/view/error404.js'; // middleware 404 для view
+import errorHandler from '../../middleware/actions/errorHandler.js'; // middleware 500 для view
 import booksRoutes from './booksRoutes.js';
 
 const router = express.Router();
@@ -12,5 +13,8 @@ router.use('/books', booksRoutes); // http://localhost:{PORT}/books
 
 // затем - обработка 404 (не сработал ни один маршрут -> http://localhost:{PORT}/unknown):
 router.use(error404);
+
+// затем - централизованная обработка ошибок -> throw new Error('Oops...') или next(err)):
+router.use(errorHandler);
 
 export default router;

@@ -1,6 +1,6 @@
-import { sendError } from '../utils/response.js';
+import { sendError } from '../../utils/response.js';
 
-// middleware для централизованной обработки ошибок:
+// middleware для централизованной обработки ошибок для слоя api:
 export default function errorHandler(err, _req, res, _next) {
   console.error(err.stack);
 

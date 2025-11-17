@@ -4,7 +4,6 @@ import { fileURLToPath } from 'node:url'; // преобразует URL файл
 import path from 'node:path'; // работа с путями
 
 import routes from './routes/index.js'; // подключение роутов
-import errorHandler from './middleware/errorHandler.js'; // ошибка сервера
 
 // Создание объекта приложения:
 const app = express();
@@ -34,8 +33,5 @@ app.use(express.urlencoded({ extended: true }));
 
 // 4. Middleware - основные маршруты:
 app.use('/', routes); // корневой роут -> http://localhost:{PORT}
-
-// 5. Middleware - централизованная обработка ошибок - throw new Error('Oops...') или next(err)):
-app.use(errorHandler);
 
 export default app;
