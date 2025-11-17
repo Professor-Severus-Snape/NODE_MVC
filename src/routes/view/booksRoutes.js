@@ -1,10 +1,14 @@
 import express from 'express';
+import multerUploadBook from '../../middleware/multerUploadBook.js'; // middleware (multer)
 import * as bookController from '../../controllers/bookController/index.js';
 
 const router = express.Router();
 
 // GET -> форма создания книги:
 router.get('/create', bookController.view.renderCreateBook);
+
+// POST -> создание книги:
+router.post('/create', multerUploadBook.single('fileBook'), bookController.actions.addBook);
 
 // GET -> форма редактирования книги:
 router.get('/:id/update', bookController.view.renderUpdateBook);

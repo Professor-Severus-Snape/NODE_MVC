@@ -1,7 +1,12 @@
 <section class="book-form">
   <h2 class="book-form__title">Добавить книгу</h2>
 
-  <form class="book-form__body">
+  <form
+    class="book-form__body"
+    action="/books/create"
+    method="POST"
+    enctype="multipart/form-data"
+  >
     <label class="book-form__label">
       Название
       <input type="text" name="title" class="book-form__input" />

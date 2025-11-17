@@ -37,7 +37,7 @@ export default class Book {
         fileCover: `обложка #${i + 1}`,
         fileName: `имя файла #${i + 1}`,
         fileBook: 'test.pdf',
-      })
+      }),
   );
 
   static getAllBooks() {
