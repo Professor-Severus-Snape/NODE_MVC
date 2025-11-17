@@ -9,6 +9,9 @@ router.get('/create', bookController.view.renderCreateBook);
 // GET -> форма редактирования книги:
 router.get('/:id/update', bookController.view.renderUpdateBook);
 
+// POST -> обновление книги:
+router.post('/:id/update', bookController.actions.updateBook);
+
 // GET -> скачивание книги (перед! динамическим id):
 router.get('/:id/download', bookController.actions.downloadBook);
 

@@ -14,5 +14,5 @@ export const deleteBook = (req, res) => {
     return;
   }
 
-  return res.redirect('/books');
+  res.redirect('/books');
 };

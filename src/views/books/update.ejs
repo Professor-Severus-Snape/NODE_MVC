@@ -1,7 +1,14 @@
 <section class="book-form">
   <h2 class="book-form__title">Редактировать книгу</h2>
 
-  <form class="book-form__body">
+  <form
+    class="book-form__body"
+    action="/books/<%= book.id %>/update"
+    method="POST"
+  >
+    <!-- скрытое поле с url редиректа: -->
+    <input type="hidden" name="redirectTo" value="<%= currentUrl %>" />
+
     <label class="book-form__label">
       Название
       <input
@@ -39,9 +46,8 @@
 
     <div class="book-form__actions">
       <button type="submit" class="book-form__btn book-form__btn_submit">Обновить</button>
-      <a href="/books/<%= book.id %>" class="book-form__btn book-form__btn_cancel">
-        Отмена
-      </a>
+      <!-- url редиректа для возврата назад: -->
+      <a href="<%= currentUrl %>" class="book-form__btn book-form__btn_cancel">Отмена</a>
     </div>
   </form>
 </section>

@@ -1,14 +1,16 @@
 import { v4 as uuid } from 'uuid';
 
 export default class Book {
+  static EMPTY = 'нет данных';
+
   constructor({
-    title = 'нет данных',
-    description = 'нет данных',
-    authors = 'нет данных',
-    favorite = 'нет данных',
-    fileCover = 'нет данных',
-    fileName = 'нет данных',
-    fileBook = 'нет данных', // имя! загруженного файла книги
+    title = Book.EMPTY,
+    description = Book.EMPTY,
+    authors = Book.EMPTY,
+    favorite = Book.EMPTY,
+    fileCover = Book.EMPTY,
+    fileName = Book.EMPTY,
+    fileBook = Book.EMPTY, // имя! загруженного файла книги
   } = {}) {
     this.id = uuid();
     this.title = title;
@@ -35,7 +37,7 @@ export default class Book {
         fileCover: `обложка #${i + 1}`,
         fileName: `имя файла #${i + 1}`,
         fileBook: 'test.pdf',
-      }),
+      })
   );
 
   static getAllBooks() {
@@ -78,7 +80,12 @@ export default class Book {
     // обновляем только существующие поля:
     bookProperties.forEach((property) => {
       if (property in newData) {
-        bookToUpdate[property] = newData[property];
+        const newValue = newData[property].trim();
+
+        bookToUpdate[property] =
+          property === 'title'
+            ? newValue || bookToUpdate.title
+            : newValue || Book.EMPTY;
       }
     });
 
