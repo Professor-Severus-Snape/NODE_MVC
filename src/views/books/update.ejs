@@ -1,9 +1,10 @@
 <section class="book-form">
   <h2 class="book-form__title">Редактировать книгу</h2>
 
+  <!-- Формы -> только GET или POST-запросы (нет ни PUT, ни PATCH, ни DELETE) -->
   <form
     class="book-form__body"
-    action="/books/<%= book.id %>/update"
+    action="/actions/books/<%= book.id %>/update"
     method="POST"
   >
     <!-- скрытое поле с url редиректа: -->
