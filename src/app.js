@@ -4,7 +4,6 @@ import { fileURLToPath } from 'node:url'; // преобразует URL файл
 import path from 'node:path'; // работа с путями
 
 import routes from './routes/index.js'; // подключение роутов
-import error404 from './middleware/error404.js'; // маршрут не найден
 import errorHandler from './middleware/errorHandler.js'; // ошибка сервера
 
 // Создание объекта приложения:
@@ -36,10 +35,7 @@ app.use(express.urlencoded({ extended: true }));
 // 4. Middleware - основные маршруты:
 app.use('/', routes); // корневой роут -> http://localhost:{PORT}
 
-// 5. Middleware - обработка 404 (не сработал ни один маршрут -> http://localhost:{PORT}/unknown):
-app.use(error404);
-
-// 6. Middleware - централизованная обработка ошибок - throw new Error('Oops...') или next(err)):
+// 5. Middleware - централизованная обработка ошибок - throw new Error('Oops...') или next(err)):
 app.use(errorHandler);
 
 export default app;
