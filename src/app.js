@@ -4,7 +4,6 @@ import { fileURLToPath } from 'node:url'; // преобразует URL файл
 import path from 'node:path'; // работа с путями
 
 import routes from './routes/index.js'; // подключение роутов
-import errorUpload from './middleware/errorUpload.js'; // ошибка загрузки файла
 import error404 from './middleware/error404.js'; // маршрут не найден
 import errorHandler from './middleware/errorHandler.js'; // ошибка сервера
 
@@ -25,20 +24,17 @@ app.set('layout', 'books/layouts/main'); // путь к main.ejs внутри vi
 
 // Middlewares уровня приложения (посл-сть: парсеры -> роуты -> маршрут не найден -> выброс ошибки):
 
-// 0. Middleware - подключение статики (CSS-стили) из папки public:
+// 1. Middleware - подключение статики (CSS-стили) из папки public:
 app.use(express.static(path.join(process.cwd(), 'public')));
 
-// 1. Middleware - JSON парсер (заголовок Content-Type: application/json):
+// 2. Middleware - JSON парсер (заголовок Content-Type: application/json):
 app.use(express.json());
 
-// 2. Middleware для формы (заголовок Content-Type: application/x-www-form-urlencoded):
+// 3. Middleware для формы (заголовок Content-Type: application/x-www-form-urlencoded):
 app.use(express.urlencoded({ extended: true }));
 
-// 3. Middleware - основные маршруты:
+// 4. Middleware - основные маршруты:
 app.use('/', routes); // корневой роут -> http://localhost:{PORT}
-
-// 4. Middleware - обработка ошибок Multer (загрузка не pdf-файла):
-app.use(errorUpload);
 
 // 5. Middleware - обработка 404 (не сработал ни один маршрут -> http://localhost:{PORT}/unknown):
 app.use(error404);

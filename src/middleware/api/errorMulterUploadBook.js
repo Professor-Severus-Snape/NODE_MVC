@@ -1,7 +1,7 @@
 import multer from 'multer';
 
 // middleware для обработки ошибок загрузки файла книги:
-export default function errorUpload(err, _req, _res, next) {
+export default function errorMulterUploadBook(err, _req, _res, next) {
   // 1. превышение допустимого размера файла:
   if (err instanceof multer.MulterError) {
     if (err.code === 'LIMIT_FILE_SIZE') {

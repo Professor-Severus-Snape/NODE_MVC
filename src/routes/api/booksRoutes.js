@@ -1,5 +1,6 @@
 import express from 'express';
-import multerUploadBook from '../../middleware/multerUploadBook.js'; // middleware (multer)
+import multerUploadBook from '../../middleware/shared/multerUploadBook.js'; // middleware (multer)
+import errorMulterUploadBook from '../../middleware/api/errorMulterUploadBook.js'; // multer err
 import * as bookController from '../../controllers/bookController/index.js'; // конечные обработчики
 
 const router = express.Router();
@@ -24,5 +25,8 @@ router
   .get(bookController.api.getBookById) // получение книги по её id
   .put(multerUploadBook.single('fileBook'), bookController.api.updateBookById) // изменение книги
   .delete(bookController.api.deleteBookById); // удаление книги по её id
+
+// middleware ошибок загрузки через multer:
+router.use(errorMulterUploadBook);
 
 export default router;
